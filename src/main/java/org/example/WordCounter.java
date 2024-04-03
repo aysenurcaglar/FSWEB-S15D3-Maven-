@@ -17,19 +17,16 @@ public class WordCounter {
                 " Almost of year of stalemate without much fighting followed, during which Greek moral and discipline faltered while Turkish strength increased." +
                 " French and Italian forces evacuated from Anatolia. The Allies offered an armistice to the Turks, which Mustafa Kemal refused.";
 
-        Map<String, Integer> wordCountMap = new HashMap<>();
 
-        String[] words = text.toLowerCase().split("\\s+");
+        String[] kelimeler = text.split("\\s+");
+        Map<String, Integer> counter = new HashMap<>();
+        for (String kelime : kelimeler) {
+            kelime = kelime.toLowerCase().replaceAll("[., !? \"]", "");
+            counter.put(kelime, counter.getOrDefault(kelime, 0) + 1);
 
-        for (String word : words) {
-            if (wordCountMap.containsKey(word)) {
-                wordCountMap.put(word, wordCountMap.get(word) + 1);
-            } else {
-                wordCountMap.put(word, 1);
-            }
         }
 
-        return wordCountMap;
+        return counter;
     }
 
     public static void main(String[] args) {

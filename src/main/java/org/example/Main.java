@@ -38,7 +38,9 @@ public class Main {
         Map<Integer, Employee> employeeMap = new HashMap<>();
         List<Employee> duplicateList = new ArrayList<>();
 
-        for (Employee employee : employees) {
+        Iterator<Employee> iterator = employees.iterator();
+        while (iterator.hasNext()) {
+            Employee employee = iterator.next();
             if (employee != null) {
                 if (employeeMap.containsKey(employee.getId())) {
                     duplicateList.add(employee);
@@ -54,7 +56,9 @@ public class Main {
     public static HashMap<Integer, Employee> findUniques(List<Employee> list) {
         HashMap<Integer, Employee> uniqueMap = new HashMap<>();
 
-        for (Employee employee : list) {
+        Iterator<Employee> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Employee employee = iterator.next();
             if (employee != null) {
                 uniqueMap.put(employee.getId(), employee);
             }
@@ -64,15 +68,12 @@ public class Main {
     }
 
     public static List<Employee> removeDuplicates(List<Employee> employees) {
-        List<Employee> uniqueList = new LinkedList<>();
+
         HashMap<Integer, Employee> uniqueMap = findUniques(employees);
         List<Employee> duplicateList = findDuplicates(employees);
+        List<Employee> uniqueList = new LinkedList<>(uniqueMap.values());
 
-        for (Employee employee : uniqueMap.values()) {
-            if (!duplicateList.contains(employee)) {
-                uniqueList.add(employee);
-            }
-        }
+        uniqueList.removeAll(duplicateList);
 
         return uniqueList;
     }
