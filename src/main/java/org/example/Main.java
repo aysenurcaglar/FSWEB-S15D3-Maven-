@@ -39,10 +39,12 @@ public class Main {
         List<Employee> duplicateList = new ArrayList<>();
 
         for (Employee employee : employees) {
-            if (employeeMap.containsKey(employee.getId())) {
-                duplicateList.add(employee);
-            } else {
-                employeeMap.put(employee.getId(), employee);
+            if (employee != null) {
+                if (employeeMap.containsKey(employee.getId())) {
+                    duplicateList.add(employee);
+                } else {
+                    employeeMap.put(employee.getId(), employee);
+                }
             }
         }
 
@@ -53,7 +55,9 @@ public class Main {
         HashMap<Integer, Employee> uniqueMap = new HashMap<>();
 
         for (Employee employee : list) {
-            uniqueMap.put(employee.getId(), employee);
+            if (employee != null) {
+                uniqueMap.put(employee.getId(), employee);
+            }
         }
 
         return uniqueMap;
